@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Add Recipe" Height="450" Width="400">
     <Grid>
-        <Label Content="Recipe Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
+        <Label Content="Recipe Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-1"/>
         <TextBox x:Name="RecipeNameTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,20,0,0"/>
         <Button Content="Add Ingredient" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="10,50,0,0" Click="AddIngredientButton_Click"/>
         <Button Content="Add Step" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="120,50,0,0" Click="AddStepButton_Click"/>

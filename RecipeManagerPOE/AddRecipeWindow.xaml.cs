@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
+
+//____________________________________________START OF FILE________________________________________________\\
 
 namespace RecipeManagerPOE
 {
@@ -10,6 +13,8 @@ namespace RecipeManagerPOE
         private List<Ingredient> ingredients;
         private List<string> steps;
 
+//________________________________________________________________________________________________________\\
+
         public AddRecipeWindow()
         {
             InitializeComponent();
@@ -17,15 +22,20 @@ namespace RecipeManagerPOE
             steps = new List<string>();
         }
 
+//___________________________________________________________________________________________________________\\
+
         private void AddIngredientButton_Click(object sender, RoutedEventArgs e)
         {
             var addIngredientWindow = new AddIngredientWindow();
             if (addIngredientWindow.ShowDialog() == true)
             {
                 ingredients.Add(addIngredientWindow.NewIngredient);
-                IngredientsListBox.Items.Add(addIngredientWindow.NewIngredient.Name);
+                IngredientsListBox.ItemsSource = null; // Clear the ItemsSource to refresh
+                IngredientsListBox.ItemsSource = ingredients.Select(i => i.Name); // Display only the Name property
             }
         }
+
+//_______________________________________________________________________________________________________________\\
 
         private void AddStepButton_Click(object sender, RoutedEventArgs e)
         {
@@ -36,6 +46,8 @@ namespace RecipeManagerPOE
                 StepsListBox.Items.Add(addStepWindow.NewStep);
             }
         }
+
+//___________________________________________________________________________________________________________________\\
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
@@ -60,3 +72,5 @@ namespace RecipeManagerPOE
         }
     }
 }
+
+//______________________________________________________END OF FILE_____________________________________________________\\

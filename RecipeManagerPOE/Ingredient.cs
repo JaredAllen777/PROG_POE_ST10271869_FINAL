@@ -4,25 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//_________________________________________________START OF FILE_____________________________________________________\\
+
 namespace RecipeManagerPOE
 {
     public class Ingredient
     {
         public string Name { get; set; }
-        public double Quantity { get; set; }
-        public string Unit { get; set; }
-        public int Calories { get; set; }
         public string FoodGroup { get; set; }
-        public double OriginalQuantity { get; set; }  // Store original quantity
+        public int Calories { get; set; }
+        public double Quantity { get; set; }
+        public string Unit { get; set; } // Assuming you need a unit property
 
-        public void EnterDetails()
+//___________________________________________________________________________________________________________________\\
+
+        public Ingredient(string name, string foodGroup, int calories, double quantity, string unit)
         {
-            // This method will be replaced by a UI in WPF
+            Name = name;
+            FoodGroup = foodGroup;
+            Calories = calories;
+            Quantity = quantity;
+            Unit = unit;
         }
 
         public void ResetQuantity()
         {
-            Quantity = OriginalQuantity;  // Reset to original quantity
+            Quantity = 1.0; // Assuming default quantity is 1
         }
     }
 }
+
+//___________________________________________________END OF FILE_____________________________________________________\\

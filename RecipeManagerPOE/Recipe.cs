@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+
+//_______________________________________________START OF FILE________________________________________________________________\\
 
 namespace RecipeManagerPOE
 {
@@ -11,52 +12,78 @@ namespace RecipeManagerPOE
         public string Name { get; set; }
         private List<Ingredient> ingredients = new List<Ingredient>();
         private List<string> steps = new List<string>();
+        public string FoodGroup { get; set; }
 
-        // Constructor that accepts a recipe name
+//____________________________________________________________________________________________________________________________\\
+
         public Recipe(string name)
         {
             Name = name;
         }
 
-        // Default constructor
+//____________________________________________________________________________________________________________________________\\
+
         public Recipe()
         {
         }
+
+//____________________________________________________________________________________________________________________________\\
 
         public void AddIngredient(Ingredient ingredient)
         {
             ingredients.Add(ingredient);
         }
 
+//____________________________________________________________________________________________________________________________\\
+
         public void AddStep(string step)
         {
             steps.Add(step);
         }
+
+//____________________________________________________________________________________________________________________________\\
 
         public List<Ingredient> GetIngredients()
         {
             return ingredients;
         }
 
+//____________________________________________________________________________________________________________________________\\
+
         public List<string> GetSteps()
         {
             return steps;
         }
+
+//____________________________________________________________________________________________________________________________\\
+
+        public int GetTotalCalories()
+        {
+            return ingredients.Sum(ingredient => ingredient.Calories);
+        }
+
+//____________________________________________________________________________________________________________________________\\
 
         public void EnterDetails()
         {
             // This method will be replaced by a UI in WPF
         }
 
+//____________________________________________________________________________________________________________________________\\
+
         public void DisplayRecipe()
         {
             // This method will be replaced by a UI in WPF
         }
 
+//____________________________________________________________________________________________________________________________\\
+
         public void ManageRecipe()
         {
             // This method will be replaced by a UI in WPF
         }
+
+//____________________________________________________________________________________________________________________________\\
 
         public void ScaleRecipe(double factor)
         {
@@ -72,6 +99,8 @@ namespace RecipeManagerPOE
             }
         }
 
+//____________________________________________________________________________________________________________________________\\
+
         public void ResetQuantity()
         {
             foreach (var ingredient in ingredients)
@@ -80,11 +109,15 @@ namespace RecipeManagerPOE
             }
         }
 
+//____________________________________________________________________________________________________________________________\\
+
         public void ClearRecipe()
         {
             ingredients.Clear();
             steps.Clear();
         }
+
+//____________________________________________________________________________________________________________________________\\
 
         public void CalculateTotalCalories()
         {
@@ -97,3 +130,5 @@ namespace RecipeManagerPOE
         }
     }
 }
+
+//___________________________________________________END OF FILE_________________________________________________________\\

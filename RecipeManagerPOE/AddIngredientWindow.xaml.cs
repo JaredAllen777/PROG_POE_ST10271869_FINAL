@@ -23,51 +23,45 @@ namespace RecipeManagerPOE
             InitializeComponent();
         }
 
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string name = IngredientNameTextBox.Text;
+                string foodGroup = ((ComboBoxItem)FoodGroupComboBox.SelectedItem)?.Content.ToString();
+                int calories = int.Parse(CaloriesTextBox.Text);
+                double quantity = double.Parse(QuantityTextBox.Text);
+                string unit = UnitTextBox.Text;
+
+                NewIngredient = new Ingredient(name, foodGroup, calories, quantity, unit);
+                DialogResult = true;
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+        }
+
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             string name = IngredientNameTextBox.Text;
-            if (string.IsNullOrEmpty(name))
-            {
-                MessageBox.Show("Please enter an ingredient name.");
-                return;
-            }
-
-            if (!double.TryParse(QuantityTextBox.Text, out double quantity))
-            {
-                MessageBox.Show("Please enter a valid quantity.");
-                return;
-            }
-
+            string foodGroup = ((ComboBoxItem)FoodGroupComboBox.SelectedItem)?.Content.ToString();
+            int calories = int.Parse(CaloriesTextBox.Text);
+            double quantity = double.Parse(QuantityTextBox.Text);
             string unit = UnitTextBox.Text;
-            if (string.IsNullOrEmpty(unit))
-            {
-                MessageBox.Show("Please enter a unit.");
-                return;
-            }
 
-            if (!int.TryParse(CaloriesTextBox.Text, out int calories))
-            {
-                MessageBox.Show("Please enter a valid calorie amount.");
-                return;
-            }
+            NewIngredient = new Ingredient(name, foodGroup, calories, quantity, unit);
 
-            string foodGroup = FoodGroupTextBox.Text;
-            if (string.IsNullOrEmpty(foodGroup))
-            {
-                MessageBox.Show("Please enter a food group.");
-                return;
-            }
-
-            NewIngredient = new Ingredient
-            {
-                Name = name,
-                Quantity = quantity,
-                Unit = unit,
-                Calories = calories,
-                FoodGroup = foodGroup
-            };
             DialogResult = true;
+            Close();
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
             Close();
         }
     }
 }
+

@@ -12,26 +12,56 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+//____________________________________________________________________START OF FILE_____________________________________________________________________________\\
+
 namespace RecipeManagerPOE
 {
     public partial class ManageRecipeWindow : Window
     {
         private Recipe recipe;
+        public bool IsDeleted { get; private set; } = false;
 
         public ManageRecipeWindow(Recipe recipe)
         {
             InitializeComponent();
             this.recipe = recipe;
+            DisplayRecipeDetails();
+        }
 
-            // Set the recipe details
+//______________________________________________________________________________________________________________________________________________________________\\
+
+        private void DisplayRecipeDetails()
+        {
             RecipeNameTextBox.Text = recipe.Name;
-            foreach (var ingredient in recipe.GetIngredients())
+
+            IngredientsListBox.ItemsSource = null;
+            IngredientsListBox.ItemsSource = recipe.GetIngredients().Select(i => i.Name).ToList();
+
+            StepsListBox.ItemsSource = null;
+            StepsListBox.ItemsSource = recipe.GetSteps();
+        }
+
+//______________________________________________________________________________________________________________________________________________________________\\
+
+        private void EditRecipeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var editRecipeWindow = new EditRecipeWindow(recipe);
+            if (editRecipeWindow.ShowDialog() == true)
             {
-                IngredientsListBox.Items.Add(ingredient.Name);
+                recipe = editRecipeWindow.UpdatedRecipe;
+                DisplayRecipeDetails();
             }
-            foreach (var step in recipe.GetSteps())
+        }
+
+//_____________________________________________________________________________________________________________________________________________________________\\
+
+        private void DeleteRecipeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to delete this recipe?", "Delete Recipe", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
             {
-                StepsListBox.Items.Add(step);
+                IsDeleted = true;
+                Close();
             }
         }
 
@@ -41,3 +71,4 @@ namespace RecipeManagerPOE
         }
     }
 }
+//_________________________________________________________________END OF FILE_________________________________________________________________________________\\
